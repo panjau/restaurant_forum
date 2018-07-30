@@ -26,14 +26,25 @@
 
 <div class="container">
   <div class="row">
-   <%= form_for [@restaurant, @comment] do |f| %>
-    <div class="form-group">
-      <%= f.text_area :content, placeholder: "留個言吧", class: "form-control" %>
+    <!-- 顯示與餐廳相關的評論 -->
+    <% @restaurant.comments.each do |comment| %>
+    <div>
+      <h4><%= comment.user.email.split("@").first %></h4>
+      <p><%= simple_format comment.content %></p>
+      <p class="text-muted">
+        <em><%= time_ago_in_words(comment.created_at) %> </em>
+      </p>
     </div>
-    <div class="form-group">
-      <%= f.submit class: "btn btn-primary" %>
-      <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
-    </div>
-  <% end %>
+    <hr>
+    <% end %>
+    <%= form_for [@restaurant, @comment] do |f| %>
+      <div class="form-group">
+        <%= f.text_area :content, placeholder: "留個言吧", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit class: "btn btn-primary" %>
+        <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+      </div>
+    <% end %>
   </div>
 </div>
