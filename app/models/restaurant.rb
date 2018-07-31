@@ -3,5 +3,6 @@ class Restaurant < ApplicationRecord
   mount_uploader :image, PhotoUploader
   belongs_to :category
 
-  has_many :comments
+# 當 Restaurant 物件被刪除時，順便刪除依賴的 Comment
+  has_many :comments, dependent: :destroy
 end
