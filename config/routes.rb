@@ -3,6 +3,15 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :restaurants, only: [:index, :show] do
     resources :comments, only: [:create, :destroy]  
+
+    collection do    # Prefix => feeds_restaurants       URI pattern => GET /restaurants/feeds(.:format)
+      get: feeds
+    end
+
+    member do
+      get: dashboard    # Prefix => dashboard_restaurant       URI pattern => GET /restaurants/:id/dashboard(.:format)
+    end
+
   end
   resources :users, only: [:show, :edit, :update]
   resources :categories, only: :show
