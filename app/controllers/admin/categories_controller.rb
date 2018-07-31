@@ -33,9 +33,13 @@ class Admin::CategoriesController < Admin::BaseController
     end
   end
   def destroy
-    @category.destroy
-    flash[:alert] = "category was successfully deleted"
+    if @category.destroy
+      flash[:alert] = "category was successfully deleted"
+    else
+      flash[:alert] = "Cannot delete record because dependent restaurants exist"
+    end
     redirect_to admin_categories_path
+
   end
 
 private
