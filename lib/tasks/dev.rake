@@ -18,7 +18,7 @@ namespace :dev do
   task fake_user: :environment do
     20.times do |i|
       user_name = FFaker::Name.first_name
-      User.create!(name: user_name, email: "#{user_name}@example.com",
+      User.create!(name: user_name,   email: "#{user_name}@example.com",
         password: "12345678"
       )
     end
@@ -37,6 +37,18 @@ namespace :dev do
     end
     puts "have created fake comments"
     puts "now you have #{Comment.count} comment data"
+  end
+
+  task update_user_name: :environment do
+    User.all.each do |user|
+      puts user.name
+      puts user.email
+      unless user.name 
+        puts "enter"
+        user.name = user.email.split('@').first
+        user.save
+      end
+    end
   end
 
 end
