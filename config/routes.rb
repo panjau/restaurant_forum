@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     end
 # Prefix => dashboard_restaurant       URI pattern => GET /restaurants/:id/dashboard(.:format)
     member do
-      get :dashboard    
+      get :dashboard 
+      post :favorite
+      post :unfavorite   
     end
 
   end
