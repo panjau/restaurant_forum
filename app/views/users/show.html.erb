@@ -19,9 +19,18 @@
         </div>
 
         <div class="clearfix"></div>
-      
       </div>
-    <br>
+      <br>
+
+      <div class="panel panel-default">
+        <% @commented_restaurants.each do |restaurant| %>
+          <div class="panel-body">
+             <%= image_tag restaurant.image %>
+          </div>
+          <div class="panel-footer"><%= link_to restaurant.name, restaurant_path(restaurant) %></div>
+        <% end %>
+      </div>
+      
     </div>
   </div>
 </div>
