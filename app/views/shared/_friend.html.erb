@@ -3,7 +3,7 @@
     <% if current_user.confirmed?(user) %>
       <%= link_to 'Unfriend', friendship_path(user), method: :delete, class: "btn btn-info" %>
     <% else %>
-      <%= link_to 'Cancel Request', friendship_path(user), method: :delete, class: "btn btn-info" %>
+      <%= link_to 'Cancel Request', cancel_friendship_path(user), method: :post, class: "btn btn-info" %>
     <% end %>
   <% elsif current_user.inverse_friend?(user) %>
     <% if user.confirmed?(current_user) %>

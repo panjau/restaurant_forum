@@ -18,6 +18,14 @@ class FriendshipsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def cancel
+    puts "Cancel"
+    @friendship = current_user.friendships.where(friend_id: params[:id]).first
+    @friendship.destroy
+    flash[:alert] = "Cancel friend request"
+    redirect_back(fallback_location: root_path)    
+  end
+
   def accept
     @friendship = current_user.inverse_friendships.where(friend_id: params[:id]).first
     @friendship.confirmed = true
