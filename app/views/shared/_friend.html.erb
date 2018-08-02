@@ -1,7 +1,17 @@
 <% if user != current_user %>
   <% if current_user.friend?(user)%>
-    <%= link_to 'Unfriend', friendship_path(user), method: :delete, class: "btn btn-info" %>
+    <% if current_user.confirmed?(user) %>
+      <%= link_to 'Unfriend', friendship_path(user), method: :delete, class: "btn btn-info" %>
+    <% else %>
+      <%= link_to 'Cancel Request', friendship_path(user), method: :delete, class: "btn btn-info" %>
+    <% end %>
+  <% elsif current_user.inverse_friend?(user) %>
+    <% if user.confirmed?(current_user) %>
+      <%= link_to 'Unfriend', friendship_path(current_user), method: :delete, class: "btn btn-info" %>
+    <% else %>
+      <%= link_to 'Accept Request', accept_friendship_path(id: current_user), method: :post, class: "btn btn-primary" %>
+    <% end %>
   <% else %>
-    <%= link_to 'Friend', friendships_path(friend_id: user), method: :post, class: "btn btn-primary" %>
+    <%= link_to 'Friend', friendships_path(friend_id: user), method: :post, class: "btn btn-primary" %> 
   <% end %>
 <% end %>

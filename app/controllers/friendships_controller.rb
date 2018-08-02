@@ -17,6 +17,18 @@ class FriendshipsController < ApplicationController
     flash[:alert] = "Friendship destroyed"
     redirect_back(fallback_location: root_path)
   end
+
+  def accept
+    @friendship = current_user.inverse_friendships.where(friend_id: params[:id]).first
+    @friendship.confirmed = true
+    if @friendship.save
+      flash[:notice] = "Successfully become friend"
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:alert] = @friendship.errors.full_messages.to_sentence
+      redirect_back(fallback_location: root_path)
+    end
+  end
 end
 
 
