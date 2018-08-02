@@ -51,4 +51,10 @@ class User < ApplicationRecord
   def confirmed?(user)
     self.friendships.where(friend_id: user.id).first.confirmed 
   end
+
+  def all_friends
+    friend_list = self.friends + self.inverse_friends
+   
+    return friend_list
+  end
 end

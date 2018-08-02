@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @favorited_restaurants = @user.favorited_restaurants
     @followings = @user.followings
     @followers = @user.followers
+    @all_friends = @user.all_friends
   end
 
   def edit

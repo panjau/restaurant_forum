@@ -107,6 +107,25 @@
             <% end %>
           </div>
         </div>
+
+        <!-- 顯示好友清單， -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong><%= @all_friends.count %></strong> 個好友</h3>
+          </div>
+
+          <div class="panel-body">
+            <% @all_friends.each do |friend| %>
+              <div class="my-restaurant">
+                <div>
+                  <%= link_to user_path(friend) do %>
+                    <%= image_tag friend.avatar, class: "img-responsive img-rounded" %>
+                    <h5><%= friend.name %></h5>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
       </div>
 
     </div>

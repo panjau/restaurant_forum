@@ -13,13 +13,18 @@ class FriendshipsController < ApplicationController
 
   def destroy
     @friendship = current_user.friendships.where(friend_id: params[:id]).first
-    @friendship.destroy
+    unless @friendship.nil?
+      @friendship.destroy
+    end
+    @inverse_friendship = current_user.inverse_friendships.where(friend_id: params[:id]).first
+    unless @inverse_friendship.nil?
+      @inverse_friendship.destroy
+    end
     flash[:alert] = "Friendship destroyed"
     redirect_back(fallback_location: root_path)
   end
 
   def cancel
-    puts "Cancel"
     @friendship = current_user.friendships.where(friend_id: params[:id]).first
     @friendship.destroy
     flash[:alert] = "Cancel friend request"
