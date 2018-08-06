@@ -14,10 +14,12 @@ class FriendshipsController < ApplicationController
   def destroy
     @friendship = current_user.friendships.where(friend_id: params[:id]).first
     unless @friendship.nil?
+      puts "@friendship = #{@friendship}"
       @friendship.destroy
     end
-    @inverse_friendship = current_user.inverse_friendships.where(friend_id: params[:id]).first
+    @inverse_friendship = current_user.inverse_friendships.where(user_id: params[:id]).first
     unless @inverse_friendship.nil?
+      puts "@inverse_friendship = #{@invere_friendship}"
       @inverse_friendship.destroy
     end
     flash[:alert] = "Friendship destroyed"
@@ -32,7 +34,7 @@ class FriendshipsController < ApplicationController
   end
 
   def accept
-    @friendship = current_user.inverse_friendships.where(friend_id: params[:id]).first
+    @friendship = current_user.inverse_friendships.where(user_id: params[:id]).first
     @friendship.confirmed = true
     if @friendship.save
       flash[:notice] = "Successfully become friend"
