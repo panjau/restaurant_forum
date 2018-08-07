@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 # Prefix => feeds_restaurants       URI pattern => GET /restaurants/feeds(.:format)
     collection do    
       get :feeds
+      get :ranking
     end
 # Prefix => dashboard_restaurant       URI pattern => GET /restaurants/:id/dashboard(.:format)
     member do
