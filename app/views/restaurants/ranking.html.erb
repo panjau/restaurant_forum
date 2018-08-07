@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="page-header">
+        <h1>Top 10 人氣餐廳</h1>
+      </div>
+    </div>
+
+    <% @top10_restaurant.each do |restaurant| %>
+    
+      <div class="col-md-4">
+        <%= image_tag restaurant.image, class: "img-responsive center-block" %>
+      </div>
+      <div class="col-md-8">
+        <h2><%= restaurant.name %></h2>
+        <span>收藏數：<%= restaurant.favorites_count %></span>
+        <p><%= truncate(restaurant.description, length: 80) %></p>
+        <%= link_to 'Show', restaurant_path(restaurant), class: "btn btn-primary" %>
+        <%= render partial: "shared/favorite", locals: {restaurant: restaurant} %>
+      </div>
+      <div class="clearfix"></div>
+      <hr>
+    <% end %>
+
+  </div>
+</div>
