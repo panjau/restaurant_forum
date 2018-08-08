@@ -1,7 +1,7 @@
 class Admin::RestaurantsController < Admin::BaseController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
   def index
-    @restaurants = Restaurant.page(params[:page]).per(10)
+    @restaurants = Restaurant.order(:id).page(params[:page]).per(10)
   end
 
   def new
